@@ -39,14 +39,12 @@ netParams.stimSourceParams['bkg'] = {'type': 'NetStim', 'rate': 200, 'noise': 0.
 netParams.stimTargetParams['bkg->all'] = {'source': 'bkg', 'conds': {'cellType': ['E','I'], 'cellModel': 'Izhi'}, 
                                             'weight': 0.05, 'delay': 'uniform(1,5)', 'synMech': 'exc'}
 
-w = 1000
-
 ## Cell connectivity rules
 netParams.connParams['E->all'] = {         # label
         'preConds': {'pop': 'E'},          # conditions of presyn cells
         'postConds': {'pop': ['E','I']},   # conditions of postsyn cells
         'probability': 1.0,                # probability of connection
-        'weight': 0.2*w,                     # synaptic weight
+        'weight': 0.2,                    # synaptic weight
         'delay': '0.2+normal(13.0,1.4)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
         'threshold': 10,                   # threshold
         'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
@@ -58,7 +56,7 @@ netParams.connParams['I->E'] = {           # label
         'preConds': {'pop': 'I'},          # conditions of presyn cells
         'postConds': {'pop': 'E'},         # conditions of postsyn cells
         'probability': 1.0,                # probability of connection
-        'weight': 0.2*w,                     # synaptic weight
+        'weight': 0.0,                     # synaptic weight
         'delay': '0.2+normal(13.0,1.4)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
         'threshold': 10,                   # threshold
         'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
