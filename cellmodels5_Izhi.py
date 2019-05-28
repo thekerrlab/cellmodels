@@ -60,7 +60,7 @@ netParams.connParams['I->E'] = {           # label
         'delay': '0.2+normal(13.0,1.4)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
         'threshold': 10,                   # threshold
         'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
-        'sec': 'dend',                     # section to connect to
+#       'sec': 'dend',                     # section to connect to
         'loc': 1.0,                        # location of synapse
         'synMech': 'inh'}                  # synaptic mechanism, target synapse
 

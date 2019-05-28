@@ -87,10 +87,10 @@ simConfig.saveTxt = False # save spikes and conn to txt file
 simConfig.saveDpk = False # save to a .dpk pickled file
 
 ### Analysis and plotting
-simConfig.analysis['plotRaster'] = {'orderInverse': False, 'saveFig': 'raster.png'} #True # Whether or not to plot a raster
-simConfig.analysis['plotTraces'] = {'include': [0,80], 'saveFig': 'cellTrace.png'}     # plot recorded traces for this list of cells  # changed from cellmodels.py
+simConfig.analysis['plotRaster'] = {'orderInverse': False, 'saveFig': 'HH_raster.png'} #True # Whether or not to plot a raster
+simConfig.analysis['plotTraces'] = {'include': [0,80], 'saveFig': 'HH_cellTrace.png'}     # plot recorded traces for this list of cells  # changed from cellmodels.py
 simConfig.analysis['plotRatePSD'] = {'include': ['allCells', 'HH_E', 'HH_I'], 
-'smooth': 10, 'saveFig': 'psd.png'} # plot recorded traces for this list of cells
+'smooth': 10, 'saveFig': 'HH_PSD.png'} # plot recorded traces for this list of cells
 # simConfig.analysis['plot2Dnet'] = True               # plot 2D visualization of cell positions and connections
 
 
