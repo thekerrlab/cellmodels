@@ -36,13 +36,15 @@ netParams.stimSourceParams['bkg'] = {'type': 'NetStim', 'rate': 20, 'noise': 1.0
 netParams.stimTargetParams['bkg->all'] = {'source': 'bkg', 'conds': {'cellType': ['E','I']}, 
                       'weight': 0.1, 'delay': 'max(1, normal(5,2))', 'synMech': 'bkg'}
 
+useconns = True # Set to False to turn off connectivities
+
 ## Cell connectivity rules
 netParams.connParams['E->all'] = {         # label
         'preConds': {'pop': 'E'},          # conditions of presyn cells
         'postConds': {'pop': ['E','I']},   # conditions of postsyn cells
         'probability': 0.1,                # probability of connection
-        'weight': 0.2,                     # synaptic weight
-        'delay': '50+normal(50.0,50)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
+        'weight': 0.2*useconns,                     # synaptic weight
+        'delay': 'uniform(0,200)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
         'threshold': 10,                   # threshold
         'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
         'sec': 'dend',                     # section to connect to
@@ -53,8 +55,8 @@ netParams.connParams['I->all'] = {           # label
         'preConds': {'pop': 'I'},          # conditions of presyn cells
         'postConds': {'pop': ['E','I']},         # conditions of postsyn cells
         'probability': 0.1,                # probability of connection
-        'weight': 0.1,                     # synaptic weight
-        'delay': '50+normal(50.0,50)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
+        'weight': 0.1*useconns,                     # synaptic weight
+        'delay': 'uniform(0,200)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
         'threshold': 10,                   # threshold
         'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
         'sec': 'dend',                     # section to connect to
