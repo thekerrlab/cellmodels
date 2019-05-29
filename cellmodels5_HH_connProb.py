@@ -1,6 +1,6 @@
-## cellmodels5_HH_connWeight.py
+## cellmodels5_HH_connProb.py
 
-# Plots the firing rate of HH neurons vs sweep of connection weight
+# Plots the firing rate of HH neurons vs sweep of connection probability
 
 from netpyne import specs, sim
 
@@ -33,15 +33,15 @@ netParams.stimSourceParams['bkg'] = {'type': 'NetStim', 'rate': 2.8, 'noise': 0.
 netParams.stimTargetParams['bkg->all'] = {'source': 'bkg', 'conds': {'cellType': ['E','I']}, 'weight': 1.0, 'delay': 'max(1, normal(5,2))', 'synMech': 'exc'}
 
 allFiringRates = []
-connWeights = [x*0.1 for x in range(11)]
-for connWeight in connWeights:
+connProbs = [x*0.1 for x in range(11)]
+for connProb in connProbs:
 
     ## Cell connectivity rules
     netParams.connParams['E->all'] = {         # label
             'preConds': {'pop': 'E'},          # conditions of presyn cells
             'postConds': {'pop': ['E','I']},   # conditions of postsyn cells
-            'probability': 1.0,                # probability of connection
-            'weight': connWeight,                     # synaptic weight
+            'probability': connProb,                # probability of connection
+            'weight': 0.8,                     # synaptic weight
             'delay': '0.2+normal(13.0,1.4)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
             'threshold': 10,                   # threshold
             'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
@@ -52,8 +52,8 @@ for connWeight in connWeights:
     netParams.connParams['I->E'] = {           # label
             'preConds': {'pop': 'I'},          # conditions of presyn cells
             'postConds': {'pop': 'E'},         # conditions of postsyn cells
-            'probability': 1.0,                # probability of connection
-            'weight': connWeight,                     # synaptic weight
+            'probability': connProb,                # probability of connection
+            'weight': 0.8,                     # synaptic weight
             'delay': '0.2+normal(13.0,1.4)',   # transmission delay (ms) min=0.2, mean=13.0, var = 1.4
             'threshold': 10,                   # threshold
             'convergence': 'uniform(0,5)',     # convergence (num presyn targeting postsyn) is uniformly distributed between 1 and 10
@@ -89,10 +89,10 @@ for connWeight in connWeights:
     simConfig.saveDpk = False # save to a .dpk pickled file
     
     ### Analysis and plotting
-    # simConfig.analysis['plotRaster'] = {'orderInverse': False, 'saveFig': 'HH_raster_%s.png'} % connWeight #True # Whether or not to plot a raster
-    # simConfig.analysis['plotTraces'] = {'include': [0,80], 'saveFig': 'HH_cellTrace_%s.png'}  % connWeight   # plot recorded traces for this list of cells  # changed from cellmodels.py
+    # simConfig.analysis['plotRaster'] = {'orderInverse': False, 'saveFig': 'HH_raster_%s.png'} % connProb #True # Whether or not to plot a raster
+    # simConfig.analysis['plotTraces'] = {'include': [0,80], 'saveFig': 'HH_cellTrace_%s.png'}  % connProb   # plot recorded traces for this list of cells  # changed from cellmodels.py
     # simConfig.analysis['plotRatePSD'] = {'include': ['allCells', 'E', 'I'], 
-    # 'smooth': 10, 'saveFig': 'HH_PSD_%s.png'} % connWeight # plot recorded traces for this list of cells
+    # 'smooth': 10, 'saveFig': 'HH_PSD_%s.png'} % connProb # plot recorded traces for this list of cells
     # simConfig.analysis['plot2Dnet'] = True               # plot 2D visualization of cell positions and connections
 
     # Create network and run simulation
@@ -102,7 +102,7 @@ for connWeight in connWeights:
     allFiringRates.append(sim.firingRate)
 
 import pylab as pl
-pl.plot(connWeights, allFiringRates)
-pl.xlabel('Connection weight')
+pl.plot(connProbs, allFiringRates)
+pl.xlabel('Connection probability')
 pl.ylabel('Firing rate (Hz)')
-pl.title('Parameter sweep of connection weight for HH neurons')
+pl.title('Parameter sweep of connection probability for HH neurons')
